@@ -1,7 +1,7 @@
 all: exe lib
 
-exe: main.c hello.h lib
-	gcc main.c -fPIC -L. -lHello -o hello
+exe: main.c
+	gcc main.c -fPIC -ldl -o hello
 
 lib: hello.c hello.h
 	gcc -shared hello.c -fPIC -o libHello.so

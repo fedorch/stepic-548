@@ -232,10 +232,10 @@ void hello_message(const char *name);
 
 ```
 hello: main.c hello.h libHello.so
-    gcc main.c -fPIC -L. -lHello -o Hello
+	gcc main.c -fPIC -L. -lHello -o hello
 
 libHello.so: hello.c hello.h
-    gcc -shared hello.c -fPIC -o libHello.so
+	gcc -shared hello.c -fPIC -o libHello.so
 ```
 
 Здесь описаны зависимости только для наших целевых файлов. Левую часть (которая
@@ -250,9 +250,9 @@ libHello.so: hello.c hello.h
 
 ```
 clean:
-    rm hello
-    rm libHello.so
-    rm *.o
+	rm hello
+	rm libHello.so
+	rm *.o
 ```
 
 Так как по умолчанию `make` пытается достичь первой цели среди указанных в
@@ -270,14 +270,14 @@ buildall: hello libHello.so
 ```
 all: exe lib
 
-exe: main.c hello.h libHello.so
-    gcc main.c -fPIC -L. -lHello -o Hello
+exe: main.c hello.h lib
+	gcc main.c -fPIC -L. -lHello -o hello
 
 lib: hello.c hello.h
-    gcc -shared hello.c -fPIC -o libHello.so
+	gcc -shared hello.c -fPIC -o libHello.so
 
 clean:
-    -rm hello libHello.so 2>/dev/null
+	-rm hello libHello.so 2>/dev/null
 ```
 
 Цель `clean` ни от чего не зависит. Она лишь удаляет созданные библиотеку и приложение.
